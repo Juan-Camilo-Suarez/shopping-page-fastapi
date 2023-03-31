@@ -1,0 +1,14 @@
+version: '3'
+services:
+  redis:
+    image: redis:latest
+    ports:
+      - 6379:6379
+    command: >
+      --requirepass password
+    volumes:
+      - redis:/data
+
+
+volumes:
+  redis:

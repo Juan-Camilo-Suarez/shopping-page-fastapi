@@ -52,6 +52,11 @@ def create(product: Product):
     return product.save()
 
 
+@app.get('/products/{pk}')
+def get(pk: str):
+    return Product.get(pk=pk)
+
+
 @app.get("/")
 async def root():
     return {"message": "Hello World"}

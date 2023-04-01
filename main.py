@@ -4,12 +4,12 @@ from starlette.middleware.cors import CORSMiddleware
 
 app = FastAPI()
 
-# app.add_middleware(
-#     CORSMiddleware,
-#     allow_origins=['http://localhost:3000'],
-#     allow_methods=['*'],
-#     allow_headers=['*'],
-# )
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=['http://localhost:3000'],
+    allow_methods=['*'],
+    allow_headers=['*'],
+)
 
 redis = get_redis_connection(
     host='localhost',

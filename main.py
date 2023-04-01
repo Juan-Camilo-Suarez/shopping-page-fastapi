@@ -57,6 +57,11 @@ def get(pk: str):
     return Product.get(pk=pk)
 
 
+@app.delete('/products/{pk}')
+def get(pk: str):
+    return Product.delete(pk)
+
+
 @app.get("/")
 async def root():
     return {"message": "Hello World"}

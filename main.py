@@ -37,6 +37,11 @@ def all():
     return Product.all_pks()
 
 
+@app.post('/products')
+def create(product: Product):
+    return product.save()
+
+
 @app.get("/")
 async def root():
     return {"message": "Hello World"}

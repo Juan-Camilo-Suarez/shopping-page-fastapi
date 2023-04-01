@@ -32,9 +32,9 @@ class Product(HashModel):
 
 
 # views
-# @app.get('/products')
-# def all():
-#     return Product.all_pks()
+@app.get('/products')
+def all():
+    return Product.all_pks()
 
 
 @app.get("/")

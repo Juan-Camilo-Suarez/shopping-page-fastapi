@@ -25,10 +25,10 @@ redis = get_redis_connection(
 class Order(HashModel):
     product_id: str
     price: float
-    fees: float
+    fee: float
     total: float
     quantity: int
-    status: str  # pending, completed and refundend
+    status: str  # pending, completed, refunded
 
     class Meta:
         database = redis
@@ -50,4 +50,11 @@ async def create(request: Request):
         status='pending'
     )
     order.save()
+
+    order_completed(order)
     return order
+
+
+def order_completed(order: Order):
+    order.status = 'completed'
+    order.save()

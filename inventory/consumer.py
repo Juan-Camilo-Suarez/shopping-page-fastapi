@@ -2,6 +2,8 @@ import time
 
 from redis_om import get_redis_connection
 
+from main import Product
+
 redis = get_redis_connection(
     host='localhost',
     port=6379,
@@ -21,7 +23,15 @@ except:
 while True:
     try:
         results = redis.xreadgroup(group, key, {key: '>'}, None)
-        print(results)
+        if results != []:
+            for result in results:
+                obj = result[1][0][1]
+                try:
+                    product = Product.get(obj['product_id'])
+                    product.quantity = product.quantity - int(obj['quantity'])
+                    product.save()
+                except:
+                    redis.xadd('refund_order', obj, '*')
 
     except Exception as e:
         print(str(e))
